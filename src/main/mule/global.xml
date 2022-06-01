@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	
+	
+	<http:listener-config name="api-httpListenerConfig">
+        <http:listener-connection host="${secure::http.host}" port="${secure::http.port}"/>
+    </http:listener-config>
+    
+   
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="e3675509-8cb7-4fc1-9bc3-0fa43bd937f7" >
+		<db:my-sql-connection host="${secure::db.host}" port="${secure::db.port}" user="${secure::db.user}" password="${secure::db.password}" database="${secure::db.db_name}" />
+	</db:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="f5a6d8d6-cedf-4b96-9bbe-16f1871ed012" file="config.yaml" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="6047f935-6da4-4809-aa6e-fe9d83a8b1ec" file="config.yaml" key="you-cant-guess-1" />
+	<configuration doc:name="Configuration" doc:id="c19731f2-fc9a-45b5-b3d6-75c03e6af1b2" defaultErrorHandler-ref="globalError_Handler" />
+	<error-handler name="globalError_Handler" doc:id="747508a3-b4b2-4b6b-9c4a-2029e0af3226" >
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="2d64e8b1-0060-4ef6-b209-9664bd516a34" >
+			<set-payload value="Internal Server Error" doc:name="Set Payload" doc:id="eb3755cb-0eea-4caa-af5b-5f6312135731" />
+			<set-variable value="500" doc:name="Set Variable" doc:id="7c033a13-d2a6-4cdd-b7af-f70f6ab403f2" variableName="httpStatus"/>
+		</on-error-continue>
+	</error-handler>
+	
+	
+</mule>

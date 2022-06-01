@@ -1,0 +1,4 @@
+%dw 2.0
+
+type auto_f61a8853_ca33_4b48_b791_98b528381cf4_Output_Variables_data = Array<{|  Date: String,   Place: String,   Price: Number,   rooms_available: Number|}>
+

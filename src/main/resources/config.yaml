@@ -1,0 +1,11 @@
+http:
+  port: "![7K4V83HfWNpUV+5IJSQtLQ==]"
+  host: "![NcAYh8VAPBU7ZoNdsrNQNw==]]"
+
+db:
+  host: "![fhCjID1FJy55SK3mFFkZgLRqM8BVr/FO1CP3lMfzJ8Y=]"
+  port: "3306"
+  user: "![RCVsYhRoCauY4Q5jbz573A==]"
+  password: "![9REs5INtzgXHXWnyG+v/ew==]"
+  db_name: "![RCVsYhRoCauY4Q5jbz573A==]"
+  

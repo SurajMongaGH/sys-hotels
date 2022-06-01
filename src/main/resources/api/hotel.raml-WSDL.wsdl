@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:schemas="https://www.example.com/schemas" xmlns:wsdl="https://www.example.com/wsdl" targetNamespace="https://www.example.com/wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:tns="https://www.example.com/schemas" targetNamespace="https://www.example.com/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="GET_Hotels_GET_InputMessage" type="schemas:GET_Hotels_GET_InputMessage" />
+      <xs:element name="GET_Hotels_GET_OutputMessage" type="schemas:GET_Hotels_GET_OutputMessage" />
+      <xs:element name="GET_Bookhotel_GET_InputMessage" type="schemas:GET_Bookhotel_GET_InputMessage" />
+      <xs:element name="GET_Bookhotel_GET_OutputMessage" type="schemas:GET_Bookhotel_GET_OutputMessage" />
+      <xs:complexType name="GET_Hotels_GET_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="Place" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GET_Hotels_GET_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GET_Bookhotel_GET_InputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="Place" type="xs:string" />
+          <xs:element minOccurs="1" name="rooms" type="xs:string" />
+          <xs:element minOccurs="1" name="date" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GET_Bookhotel_GET_OutputMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="response" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="GET_Hotels_GET_InputMessage">
+    <part name="GET_Hotels_GET_InputMessage" element="schemas:GET_Hotels_GET_InputMessage" />
+  </message>
+  <message name="GET_Hotels_GET_OutputMessage">
+    <part name="GET_Hotels_GET_OutputMessage" element="schemas:GET_Hotels_GET_OutputMessage" />
+  </message>
+  <message name="GET_Bookhotel_GET_InputMessage">
+    <part name="GET_Bookhotel_GET_InputMessage" element="schemas:GET_Bookhotel_GET_InputMessage" />
+  </message>
+  <message name="GET_Bookhotel_GET_OutputMessage">
+    <part name="GET_Bookhotel_GET_OutputMessage" element="schemas:GET_Bookhotel_GET_OutputMessage" />
+  </message>
+  <portType name="hotel_PortType">
+    <operation name="GET_Hotels_GET">
+      <documentation>get all hotels</documentation>
+      <input message="wsdl:GET_Hotels_GET_InputMessage" />
+      <output message="wsdl:GET_Hotels_GET_OutputMessage">
+        <documentation />
+      </output>
+    </operation>
+    <operation name="GET_Bookhotel_GET">
+      <documentation>book hotel rooms</documentation>
+      <input message="wsdl:GET_Bookhotel_GET_InputMessage" />
+      <output message="wsdl:GET_Bookhotel_GET_OutputMessage">
+        <documentation />
+      </output>
+    </operation>
+  </portType>
+  <binding name="hotel_Binding" type="wsdl:hotel_PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GET_Hotels_GET">
+      <soap:operation soapAction="GET_Hotels_GET" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GET_Bookhotel_GET">
+      <soap:operation soapAction="GET_Bookhotel_GET" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="hotel">
+    <documentation />
+    <port name="default_Port" binding="wsdl:hotel_Binding">
+      <soap:address location="https://www.example.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>
