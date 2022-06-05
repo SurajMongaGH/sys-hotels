@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="implementation-suite.xml" />
+	<munit:test name="getHotels-test" doc:id="4d6f91b0-9031-4242-b458-ceb1a4fe05ec" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Copy_of_Select" doc:id="e36960a7-17fa-4ad9-aa51-4549ebb07d4d" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="2b98f021-e8a9-4789-99b4-cdfcdf4902b9" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://getHotelstest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="place" value="#[output application/java --- readUrl('classpath://getHotelstest\mock_variable_.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Copy_of_Set Variable" doc:id="62203770-a7df-459b-a0ea-cf3877e22ed6" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="6f539e38-80cf-4dcc-9904-76fc7aa6416b" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="place" value="#[output application/java --- readUrl('classpath://getHotelstest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Copy_of_Set Variable" doc:id="4c85af3a-35bc-40fd-bf4e-08e620a707c2" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="2167cbf4-2340-4e31-bd52-53a2e8210cc7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="data" value="#[output application/json --- readUrl('classpath://getHotelstest\mock_variable_2.dwl')]" mediaType="application/json" encoding="UTF-8" />
+						<munit-tools:variable key="place" value="#[output application/java --- readUrl('classpath://getHotelstest\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="065dd47b-8567-4452-913e-5c688d8c3fd3" >
+				<munit:payload value="#[output application/java --- readUrl('classpath://getHotelstest\set-event_payload.dwl')]" mediaType="application/java" />
+				<munit:attributes value="#[output application/java --- readUrl('classpath://getHotelstest\set-event_attributes.dwl')]" mediaType="application/java" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getHotels" doc:id="449cf80e-9810-4ae4-ae6c-710ed7a74fad" name="getHotels"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="e5d3c9cd-7867-4e15-a8d3-32a3efb4380f" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getHotelstest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="bookFlights-test" doc:id="f1057680-0f85-4560-a72d-d691b50ab14a" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Copy_of_Set Payload" doc:id="795e07a8-3f87-4174-a5db-972a7a07e531" processor="set-payload">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3e4fdf20-8cbf-4a64-96bb-fd182903f1d7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[readUrl('classpath://bookFlightstest\mock_payload.dwl')]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Copy_of_Set Variable" doc:id="53a70d03-60fd-40bd-8e5a-91f9da1270ee" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="63efc72d-c134-400a-937e-fde9377d04a0" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="place" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Copy_of_Select" doc:id="f2c5bcea-099c-4413-845a-ff4d8a746306" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="273658e3-d535-4339-9f36-a495c5018c68" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_payload1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="date" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="place" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_2.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="number_of_rooms" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_3.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Copy_of_Set Variable" doc:id="d89f3a7d-9863-43ba-a340-ed8dcfff9e3f" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="332abb76-d04f-4478-845e-67978f5822f5" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="date" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_4.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="place" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_5.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="number_of_rooms" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_6.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:mock-when doc:name="Mock Copy_of_Set Variable" doc:id="04a92ea1-b52e-4f9d-9c11-1e3698ec9d49" processor="set-variable">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="e60332f0-3830-4736-ae4f-1cf9d1c6e4be" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:variables >
+						<munit-tools:variable key="place" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_7.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:variable key="number_of_rooms" value="#[output application/java --- readUrl('classpath://bookFlightstest\mock_variable_8.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="e612cb9d-64f2-4041-9c61-235b4d2be7f1" >
+				<munit:payload value="#[output application/java --- readUrl('classpath://bookFlightstest\set-event_payload.dwl')]" mediaType="application/java" />
+				<munit:attributes value="#[output application/java --- readUrl('classpath://bookFlightstest\set-event_attributes.dwl')]" mediaType="application/java" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<try doc:name="Try" doc:id="47c2f386-552b-46b8-9043-4befe55b546d" >
+				<flow-ref doc:name="Flow-ref to bookFlights" doc:id="a2bcae47-7ce2-4b7b-aece-04fb6b578031" name="bookFlights" />
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="823ce914-f3c9-4317-b137-684b2314457c" >
+						<logger level="INFO" doc:name="Logger" doc:id="d8839001-6f71-42f3-b045-1885a4ce4c8c" message="Inside Error Continue"/>
+					</on-error-continue>
+				</error-handler>
+			</try>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="f9b28905-259b-4a36-b5c2-09561cab8af3" is="#[MunitTools::notNullValue()]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
