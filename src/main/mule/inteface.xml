@@ -15,9 +15,8 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
                 <http:headers>#[attributes.protocolHeaders default {}]</http:headers>
             </http:error-response>
         </http:listener>
-        <apikit-soap:router config-ref="soapkit-config">
-            <apikit-soap:message>#[payload]</apikit-soap:message>
-            <apikit-soap:attributes>#[
+        <apikit-soap:router config-ref="soapkit-config" doc:id="462253f4-4d94-4fdf-bc2c-ff9f0bd11b18">
+            <apikit-soap:attributes><![CDATA[#[
               %dw 2.0
               output application/java
               ---
@@ -25,13 +24,13 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
                   headers: attributes.headers,
                   method: attributes.method,
                   queryString: attributes.queryString
-            }]</apikit-soap:attributes>
+            }]]]></apikit-soap:attributes>
         </apikit-soap:router>
     </flow>
     <flow name="GET_Hotels_GET:\soapkit-config">
 		<flow-ref doc:name="getHotels" doc:id="0d8e32d5-18fd-4be9-bdd2-0e8fcd64b71e" name="getHotels"/>
     </flow>
     <flow name="GET_Bookhotel_GET:\soapkit-config">
-		<flow-ref doc:name="BookFlights" doc:id="0bce1a70-7edb-47d5-8f38-6e3fc00b0b5d" name="bookFlights"/>
+		<flow-ref doc:name="BookHotel" doc:id="0bce1a70-7edb-47d5-8f38-6e3fc00b0b5d" name="bookhotel"/>
     </flow>
 </mule>

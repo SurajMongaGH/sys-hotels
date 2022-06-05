@@ -9,7 +9,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<flow name="getHotels" doc:id="f61a8853-ca33-4b48-b791-98b528381cf4" >
 		<set-variable value="#[payload..body[0][0][0]]" doc:name=" Set Variable" doc:id="6f539e38-80cf-4dcc-9904-76fc7aa6416b" variableName="place" />
 		<db:select doc:name=" Select" doc:id="2b98f021-e8a9-4789-99b4-cdfcdf4902b9" config-ref="Database_Config" >
-			<db:sql ><![CDATA[select * from TAJ where Place= :place;
+			<db:sql ><![CDATA[select * from TAJ where Place= :place and rooms_available>0;
 ]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{ place
 	: vars.place
@@ -57,7 +57,7 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
 			</otherwise>
 		</choice>
 	</flow>
-	<flow name="bookFlights" doc:id="d74ece07-46c9-474b-bf79-4fb298791474" >
+	<flow name="bookhotel" doc:id="d74ece07-46c9-474b-bf79-4fb298791474" >
 		<set-variable value="#[payload..body[0][0][0]]" doc:name=" Set Variable" doc:id="63efc72d-c134-400a-937e-fde9377d04a0" variableName="place" />
 		<set-variable value="#[payload..body[0][0][1]]" doc:name=" Set Variable" doc:id="e60332f0-3830-4736-ae4f-1cf9d1c6e4be" variableName="number_of_rooms" />
 		<set-variable value="#[payload..body[0][0][2]]" doc:name=" Set Variable" doc:id="332abb76-d04f-4478-845e-67978f5822f5" variableName="date" />
