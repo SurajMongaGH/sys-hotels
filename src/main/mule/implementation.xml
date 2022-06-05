@@ -7,15 +7,15 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<flow name="getHotels" doc:id="f61a8853-ca33-4b48-b791-98b528381cf4" >
-		<set-variable value="#[payload..body[0][0][0]]" doc:name="Copy_of_Set Variable" doc:id="6f539e38-80cf-4dcc-9904-76fc7aa6416b" variableName="place" />
-		<db:select doc:name="Copy_of_Select" doc:id="2b98f021-e8a9-4789-99b4-cdfcdf4902b9" config-ref="Database_Config" >
+		<set-variable value="#[payload..body[0][0][0]]" doc:name=" Set Variable" doc:id="6f539e38-80cf-4dcc-9904-76fc7aa6416b" variableName="place" />
+		<db:select doc:name=" Select" doc:id="2b98f021-e8a9-4789-99b4-cdfcdf4902b9" config-ref="Database_Config" >
 			<db:sql ><![CDATA[select * from TAJ where Place= :place;
 ]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{ place
 	: vars.place
 }]]]></db:input-parameters>
 		</db:select>
-		<ee:transform doc:name="Copy_of_Transform Message" doc:id="9f199d0d-5a76-4288-98e2-4d6658982aef" >
+		<ee:transform doc:name=" Transform Message" doc:id="9f199d0d-5a76-4288-98e2-4d6658982aef" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -23,9 +23,9 @@ output application/json
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<choice doc:name="Copy_of_Choice" doc:id="59f3ce5f-4c7a-41fb-8ca2-facb6f71d88d" >
+		<choice doc:name=" Choice" doc:id="59f3ce5f-4c7a-41fb-8ca2-facb6f71d88d" >
 			<when expression="#[sizeOf(payload)==0]" >
-				<ee:transform doc:name="Copy_of_Transform Message" doc:id="336f830e-047e-4e3d-a679-1f7f38534e39" >
+				<ee:transform doc:name=" Transform Message" doc:id="336f830e-047e-4e3d-a679-1f7f38534e39" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
@@ -40,8 +40,8 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
 				</ee:transform>
 			</when>
 			<otherwise >
-				<set-variable value="#[payload]" doc:name="Copy_of_Set Variable" doc:id="2167cbf4-2340-4e31-bd52-53a2e8210cc7" variableName="data" />
-				<ee:transform doc:name="Copy_of_Transform Message" doc:id="df19da32-5933-4743-88c7-ebe00314a376" >
+				<set-variable value="#[payload]" doc:name=" Set Variable" doc:id="2167cbf4-2340-4e31-bd52-53a2e8210cc7" variableName="data" />
+				<ee:transform doc:name=" Transform Message" doc:id="df19da32-5933-4743-88c7-ebe00314a376" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
@@ -58,17 +58,17 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
 		</choice>
 	</flow>
 	<flow name="bookFlights" doc:id="d74ece07-46c9-474b-bf79-4fb298791474" >
-		<set-variable value="#[payload..body[0][0][0]]" doc:name="Copy_of_Set Variable" doc:id="63efc72d-c134-400a-937e-fde9377d04a0" variableName="place" />
-		<set-variable value="#[payload..body[0][0][1]]" doc:name="Copy_of_Set Variable" doc:id="e60332f0-3830-4736-ae4f-1cf9d1c6e4be" variableName="number_of_rooms" />
-		<set-variable value="#[payload..body[0][0][2]]" doc:name="Copy_of_Set Variable" doc:id="332abb76-d04f-4478-845e-67978f5822f5" variableName="date" />
-		<db:select doc:name="Copy_of_Select" doc:id="273658e3-d535-4339-9f36-a495c5018c68" config-ref="Database_Config" >
+		<set-variable value="#[payload..body[0][0][0]]" doc:name=" Set Variable" doc:id="63efc72d-c134-400a-937e-fde9377d04a0" variableName="place" />
+		<set-variable value="#[payload..body[0][0][1]]" doc:name=" Set Variable" doc:id="e60332f0-3830-4736-ae4f-1cf9d1c6e4be" variableName="number_of_rooms" />
+		<set-variable value="#[payload..body[0][0][2]]" doc:name=" Set Variable" doc:id="332abb76-d04f-4478-845e-67978f5822f5" variableName="date" />
+		<db:select doc:name=" Select" doc:id="273658e3-d535-4339-9f36-a495c5018c68" config-ref="Database_Config" >
 			<db:sql ><![CDATA[select rooms_available from TAJ where Place= :Place AND Date= :date;]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{
 	Place: vars.place,
 	date: vars.date
 }]]]></db:input-parameters>
 		</db:select>
-		<ee:transform doc:name="Copy_of_Transform Message" doc:id="9fcdb165-d1fb-4c7e-a6a0-a5f171d461eb" >
+		<ee:transform doc:name=" Transform Message" doc:id="9fcdb165-d1fb-4c7e-a6a0-a5f171d461eb" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -76,10 +76,10 @@ output application/json
 payload[0].rooms_available]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<choice doc:name="Copy_of_Choice" doc:id="dea592aa-9d24-4c8f-8036-606076e4e415" >
+		<choice doc:name=" Choice" doc:id="dea592aa-9d24-4c8f-8036-606076e4e415" >
 			<when expression="#[payload == null]" >
-				<set-payload value="No rooms available" doc:name="Copy_of_Set Payload" doc:id="3e4fdf20-8cbf-4a64-96bb-fd182903f1d7" />
-				<ee:transform doc:name="Copy_of_Transform Message" doc:id="c48f8d91-79fa-4ab7-961f-f2bae9d82450" >
+				<set-payload value="No rooms available" doc:name=" Set Payload" doc:id="3e4fdf20-8cbf-4a64-96bb-fd182903f1d7" />
+				<ee:transform doc:name=" Transform Message" doc:id="c48f8d91-79fa-4ab7-961f-f2bae9d82450" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
@@ -94,8 +94,8 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
 				</ee:transform>
 			</when>
 			<when expression="#[vars.number_of_rooms&gt;payload]" >
-				<set-payload value='#["only "++(payload) as String++" rooms are available"]' doc:name="Copy_of_Set Payload" doc:id="d4184b56-16e9-4a62-bdd8-f7f0d7a45081" />
-				<ee:transform doc:name="Copy_of_Transform Message" doc:id="be368e8c-2033-49cd-8dca-3f3854c174ea" >
+				<set-payload value='#["only "++(payload) as String++" rooms are available"]' doc:name=" Set Payload" doc:id="d4184b56-16e9-4a62-bdd8-f7f0d7a45081" />
+				<ee:transform doc:name=" Transform Message" doc:id="be368e8c-2033-49cd-8dca-3f3854c174ea" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
@@ -110,7 +110,7 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
 				</ee:transform>
 			</when>
 			<otherwise >
-				<db:update doc:name="Copy_of_Update" doc:id="186d734b-08d4-48d9-bb72-ad0f69c99ad2" config-ref="Database_Config" >
+				<db:update doc:name=" Update" doc:id="186d734b-08d4-48d9-bb72-ad0f69c99ad2" config-ref="Database_Config" >
 					<db:sql ><![CDATA[UPDATE TAJ SET rooms_available=rooms_available - :rooms where Place= :Place AND Date= :date ]]></db:sql>
 					<db:input-parameters ><![CDATA[#[{
 	rooms:vars.number_of_rooms as Number,
@@ -118,7 +118,7 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
 	date:vars.date
 }]]]></db:input-parameters>
 				</db:update>
-				<ee:transform doc:name="Copy_of_Transform Message" doc:id="d8db2683-e3b9-46e3-ba60-0ee4744d2c44" >
+				<ee:transform doc:name=" Transform Message" doc:id="d8db2683-e3b9-46e3-ba60-0ee4744d2c44" >
 					<ee:message >
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/java

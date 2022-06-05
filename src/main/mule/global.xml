@@ -22,9 +22,13 @@ http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/sc
 	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="6047f935-6da4-4809-aa6e-fe9d83a8b1ec" file="config.yaml" key="you-cant-guess-1" />
 	<configuration doc:name="Configuration" doc:id="c19731f2-fc9a-45b5-b3d6-75c03e6af1b2" defaultErrorHandler-ref="globalError_Handler" />
 	<error-handler name="globalError_Handler" doc:id="747508a3-b4b2-4b6b-9c4a-2029e0af3226" >
-		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="2d64e8b1-0060-4ef6-b209-9664bd516a34" >
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="2d64e8b1-0060-4ef6-b209-9664bd516a34" type="DB:CONNECTIVTY">
+			<set-payload value="Database connection issue" doc:name="Set Payload" doc:id="29986be2-0267-46f9-a55b-e25f84bf0b21" />
+			<set-variable value="500" doc:name="Set Variable" doc:id="d051b3d0-18f1-4b6c-805d-041d4eaf5779" variableName="httpStatus"/>
+		</on-error-continue>
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="90fcdd64-3478-4c07-b67f-62ec1e3624ca" >
 			<set-payload value="Internal Server Error" doc:name="Set Payload" doc:id="eb3755cb-0eea-4caa-af5b-5f6312135731" />
-			<set-variable value="500" doc:name="Set Variable" doc:id="7c033a13-d2a6-4cdd-b7af-f70f6ab403f2" variableName="httpStatus"/>
+			<set-variable value="500" doc:name="Set Variable" doc:id="7c033a13-d2a6-4cdd-b7af-f70f6ab403f2" variableName="httpStatus" />
 		</on-error-continue>
 	</error-handler>
 	
